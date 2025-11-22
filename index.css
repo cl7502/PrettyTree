@@ -1,0 +1,23 @@
+    <style>
+      :root {
+        --bg-color: #1e1e1e;
+        --bg-dark: #252526;
+        --bg-light: #333333;
+        --text-primary: #d4d4d4;
+        --text-secondary: #a0a0a0;
+        --accent: #007acc;
+        --border: #454545;
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+      ::-webkit-scrollbar { width: 10px; height: 10px; }
+      ::-webkit-scrollbar-track { background: var(--bg-color); }
+      ::-webkit-scrollbar-thumb { background: #424242; border-radius: 5px; }
+      ::-webkit-scrollbar-thumb:hover { background: #4f4f4f; }
+
+      button { font-family: inherit; }
+
+      /* Loading Spinner */
+      .spinner { border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top: 3px solid #fff; width: 20px; height: 20px; animation: spin 1s linear infinite; }
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>

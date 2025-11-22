@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Universal Beautifier & Visualizer</title>
+
+        <!-- Tailwind CSS Strategy:
+             DEV: Use CDN for instant startup without build step latency.
+             PROD: Use built CSS (injected by Vite via main.tsx import) for performance.
+        -->
+        <script type="module">
+            // Safety check: import.meta.env exists only in Vite environments.
+            // We wrap it in try-catch or check existence to prevent crashes in raw static previews.
+            try {
+                if (import.meta.env && import.meta.env.DEV) {
+                    const script = document.createElement("script");
+                    script.src = "https://cdn.tailwindcss.com";
+                    document.head.appendChild(script);
+                }
+            } catch (e) {
+                console.warn(
+                    "Tailwind CDN script skipped (non-Vite environment detected).",
+                );
+            }
+        </script>
+
+        <style>
+            :root {
+                --bg-color: #1e1e1e;
+                --bg-dark: #252526;
+                --text-primary: #d4d4d4;
+            }
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+                background: var(--bg-color);
+                color: var(--text-primary);
+                overflow: hidden;
+            }
+            #root {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            /* Custom Scrollbar */
+            ::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
+            }
+            ::-webkit-scrollbar-track {
+                background: var(--bg-color);
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #424242;
+                border-radius: 5px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #4f4f4f;
+            }
+
+            @keyframes fade-in-up {
+                0% {
+                    opacity: 0;
+                    transform: translate(-50%, 10px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translate(-50%, 0);
+                }
+            }
+            .animate-fade-in-up {
+                animation: fade-in-up 0.3s ease-out forwards;
+            }
+        </style>
+        <script type="importmap">
+            {
+                "imports": {
+                    "react": "https://aistudiocdn.com/react@^19.2.0",
+                    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+                    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.tsx"></script>
+    </body>
+</html>
